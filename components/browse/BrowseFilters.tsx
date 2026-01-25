@@ -12,7 +12,7 @@ const POST_TYPES = [
   { label: "Group", value: "GROUP" },
 ];
 
-export function ForumFilters() {
+export function BrowseFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 

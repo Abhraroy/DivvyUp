@@ -5,7 +5,7 @@ import { LayoutGrid, Home, Settings, MessageSquareText, LogOut, User } from 'luc
 
 const NAV_ITEMS = [
     { label: 'Dashboard', icon: Home, href: '/console' },
-    { label: 'Forum', icon: Settings, href: '/console/forum' },
+    { label: 'Browse', icon: Settings, href: '/console/browse' },
     { label: 'Chat', icon: MessageSquareText, href: '/console/chat' },
 ];
 

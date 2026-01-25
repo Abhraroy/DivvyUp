@@ -28,6 +28,7 @@ create table public.subscription_posts (
   updated_at timestamp with time zone null default now(),
   platform_type text null,
   tags text[] null,
+  expiry_date date null,
   constraint subscription_posts_pkey primary key (id),
   constraint subscription_posts_owner_id_fkey1 foreign KEY (owner_id) references profiles (user_id) on update CASCADE on delete CASCADE,
   constraint subscription_posts_group_status_check check (

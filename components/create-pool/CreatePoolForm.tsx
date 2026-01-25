@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { createPool } from "@/app/console/create-pool/actions";
-import { Loader2, TrendingDown, CheckSquare, Image, Check } from "lucide-react";
+import { Loader2, TrendingDown, CheckSquare, Image, Check,ArrowBigLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const SERVICES = [
   "ENTERTAINMENT",
@@ -39,6 +40,7 @@ const COMMON_TLDS = [
 ];
 
 export default function CreatePoolForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState<string>("");
   const [slots, setSlots] = useState<string>("2");
@@ -94,6 +96,12 @@ export default function CreatePoolForm() {
       <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-8 border-b-4 border-black pb-4">
         Efficiency-driven subscription sharing
       </p>
+      <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
+      onClick={() => router.push("/console/browse")}
+      >
+        <ArrowBigLeft className="h-5 w-5" />
+        <span className="font-bold uppercase tracking-wider">Back to Browse</span>
+      </div>
 
       <form
         onSubmit={handleSubmit}

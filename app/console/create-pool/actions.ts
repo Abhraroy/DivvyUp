@@ -32,10 +32,8 @@ export async function createPool(formData: FormData) {
   // The design shows "Total Price" and "Available Slots".
   // Let's just do Total / (Slots + 1) to be safe for a "pool", or just store the raw values.
 
-  if(ownDetails === "true" && totalPrice && totalSlots){
+  if(ownDetails === "on" && totalPrice && totalSlots){
     pricePerUser = totalPrice > 0 && totalSlots > 0 ? (totalPrice / (totalSlots + 1)) : null;
-  }else if(totalPrice && totalSlots){
-    pricePerUser = null
   }
 
 
@@ -60,5 +58,8 @@ export async function createPool(formData: FormData) {
 
   console.log(data)
 
-   redirect("/console/forum");
+   redirect("/console/browse");
 }
+
+
+
