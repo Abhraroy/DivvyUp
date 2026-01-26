@@ -21,14 +21,39 @@ export async function joinPool(post_id: string) {
      }
    }
    
+
    
    const {data:memberData,error:memberError} = await supabase.from("subscription_members").insert({
     subscription_id:post_id,
     member_id:member_id,
-    
    })
-
+   console.log("member data",memberData)
    if(memberError){
+    return {
+        success:false,
+        message:"Failed to join pool"
+    }
+   }
+   const {data:conversation,error:conversationError} = await supabase.from("conversations")
+   .select(
+    "id"
+   )
+   .eq("subscription_id",post_id)
+   .single()
+   console.log("conversation data",conversation)
+   if(conversationError){
+    return {
+        success:false,
+        message:"Failed to join pool"
+    }
+   }
+   console.log("conversation data",conversation)
+   const {data:conversationParticipant,error:conversationParticipantError} = await supabase.from("conversation_participants").insert({
+    conversation_id:conversation.id,
+    user_id:member_id,
+   })
+   console.log("conversation participant data",conversationParticipant)
+   if(conversationParticipantError){
     return {
         success:false,
         message:"Failed to join pool"

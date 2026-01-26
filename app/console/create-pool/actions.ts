@@ -55,8 +55,52 @@ export async function createPool(formData: FormData) {
     console.error("Error creating pool:", error);
     throw new Error("Failed to create pool");
   }
-
   console.log(data)
+   
+
+  console.log("Creating conversation")
+  console.log(data[0].id)
+
+  const payload = {
+    subscription_id:`${data[0].id}`,
+    type:"group"
+  }
+
+  console.log(payload)
+
+
+  const {data:subscriptionMember,error:subscriptionMemberError} = await supabase.from("subscription_members").insert({
+    subscription_id:`${data[0].id}`,
+    member_id:userData.user.id,
+  }).select("*");
+  console.log(subscriptionMember)
+  if(subscriptionMemberError){
+    console.error("Error creating subscription member:", subscriptionMemberError);
+    throw new Error("Failed to create subscription member");
+  }
+
+
+
+  const {data:conversation,error:conversationError} = await supabase.from("conversations").insert(payload).select("*");
+
+  if(conversationError){
+    console.error("Error creating conversation:", conversationError);
+    throw new Error("Failed to create conversation");
+  }
+
+  console.log(conversation)
+
+  const {data:conversationParticipant ,error:conversationParticipantError} = await supabase.from("conversation_participants").insert({
+    conversation_id:conversation[0].id,
+    user_id:userData.user.id,
+  }).select();
+
+  if(conversationParticipantError){
+    console.error("Error creating conversation participant:", conversationParticipantError);
+    throw new Error("Failed to create conversation participant");
+  }
+
+  console.log("conversationParticipant",conversationParticipant)
 
    redirect("/console/browse");
 }

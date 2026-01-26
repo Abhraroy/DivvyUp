@@ -14,10 +14,12 @@ export default async function BrowsePage({
   const typeFilter = params.type;
 
   const supabase = await createClient();
+  const { data: {user}, error: userError } = await supabase.auth.getUser();
 
   let query = supabase
     .from("subscription_posts")
     .select("*, owner_id(*)")
+    .neq("owner_id",user?.id)
     .order("created_at", { ascending: false });
 
   if (platformFilter && platformFilter !== "All") {
@@ -29,6 +31,7 @@ export default async function BrowsePage({
   }
 
   const { data: posts, error } = await query;
+  console.log(posts)
 
   if (error) {
     console.error("Error fetching posts:", error);
