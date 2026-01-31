@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <>
         {/* Desktop Sidebar */}
-        <nav className="hidden md:flex flex-col  h-screen w-64 bg-brand-dark/95 backdrop-blur-md border-r border-white/10 z-50">
+        <nav className="hidden md:flex flex-col h-screen w-64 bg-brand-dark/95 backdrop-blur-md border-r border-white/10 z-50">
             <div className="p-6">
                 <Link href="/console" className="flex items-center gap-2 group mb-8">
                     <div className="bg-brand-blue p-1.5 rounded-sm group-hover:bg-brand-blue-hover transition-colors">

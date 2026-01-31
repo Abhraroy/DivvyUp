@@ -6,10 +6,12 @@ export default function ChatIcons({
   conversation_id,
   conversation_type,
   conversation_name,
+  onSelect,
 }: {
   conversation_id: string;
   conversation_type: string;
   conversation_name: string;
+  onSelect?: () => void;
 }) {
   const { setConversationId, setConversationType, setConversationName } =
     useChatStore();
@@ -18,6 +20,7 @@ export default function ChatIcons({
     setConversationId(conversation_id);
     setConversationType(conversation_type);
     setConversationName(conversation_name);
+    onSelect?.();
   };
 
   return (

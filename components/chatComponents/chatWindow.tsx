@@ -1,11 +1,17 @@
 "use client";
 import { useChatStore } from "@/lib/zustand/chatStore";
-import { MessageSquareDashed, Users, User, Loader2 } from "lucide-react";
+import { ArrowLeft, MessageSquareDashed, Users, User, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useRef } from "react";
 import { useAuthStore } from "@/lib/zustand/AuthStore";
 
-export default function ChatWindow() {
+export type ChatWindowProps = {
+  onBack?: () => void;
+  className?: string;
+};
+
+export default function ChatWindow(props: ChatWindowProps) {
+  const { onBack, className = "" } = props;
   const { conversation_id, conversation_name, conversation_type } =
     useChatStore();
   const { user, setUser } = useAuthStore();
@@ -57,6 +63,7 @@ export default function ChatWindow() {
   }, [conversation_id]);
 
   useEffect(() => {
+    if (!conversation_id) return;
     const channel = supabase
       .channel(`chat-${conversation_id}`)
       .on(
@@ -65,6 +72,7 @@ export default function ChatWindow() {
           event: "INSERT",
           schema: "public",
           table: "chat_messages",
+          filter: `conversation_id=eq.${conversation_id}`,
         },
         (payload) => {
           console.log(payload);
@@ -110,8 +118,18 @@ export default function ChatWindow() {
   }
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className={`h-full w-full flex flex-col ${className}`}>
       <div className="w-full border-b p-4 flex flex-row gap-2 items-center justify-start  ">
+        {onBack && (
+          <button
+            type="button"
+            onClick={onBack}
+            className="md:hidden mr-1 inline-flex items-center justify-center rounded-md border border-white/20 p-2"
+            aria-label="Back to chats"
+          >
+            <ArrowLeft className="h-4 w-4 text-white" />
+          </button>
+        )}
         {conversation_type === "direct" ? (
           <User className="text-white" />
         ) : (

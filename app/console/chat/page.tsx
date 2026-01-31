@@ -1,5 +1,4 @@
-import ChatSidebar from "@/components/chatComponents/chatSidebar";
-import ChatWindow from "@/components/chatComponents/chatWindow";
+import ChatShell from "./ChatShell";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function ChatPage() {
@@ -7,80 +6,59 @@ export default async function ChatPage() {
 
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
 
-  const start = performance.now();
+  if (!user?.id) {
+    return <ChatShell initialConversations={[]} />;
+  }
+
   const { data: myConversations } = await supabase
     .from("conversation_participants")
     .select("conversation_id")
-    .eq("user_id", user?.id);
+    .eq("user_id", user.id);
 
-  // Step 2: fetch full conversations
-  const { data: subdata, error: suberror } = await supabase
+  const ids =
+    myConversations?.map((c: any) => c.conversation_id).filter(Boolean) ?? [];
+
+  if (ids.length === 0) {
+    return <ChatShell initialConversations={[]} />;
+  }
+
+  const { data: subdata } = await supabase
     .from("conversations")
     .select(
       `
-    id,
-    type,
-    subscription_posts (
-      title
-    ),
-    conversation_participants (
-      user_id,
-      profiles(
-        name
-      )
-    )`,
+        id,
+        type,
+        subscription_posts ( title ),
+        conversation_participants (
+          user_id,
+          profiles( name )
+        )
+      `,
     )
-    .in("id", myConversations?.map((c) => c.conversation_id) ?? []);
+    .in("id", ids);
 
-  console.log(subdata);
-  console.log(suberror);
-  const end = performance.now();
-  console.log(`Async execution: ${(end - start).toFixed(2)} ms`);
+  const initialConversations =
+    subdata?.map((item: any) => {
+      if (item.type === "direct") {
+        const otherUser = item.conversation_participants?.find(
+          (p: any) => p.user_id !== user.id,
+        );
 
+        return {
+          conversation_id: item.id,
+          conversation_type: item.type,
+          conversation_name: otherUser?.profiles?.name ?? "Unknown user",
+        };
+      }
 
-  const propObjectArr = subdata?.map((item) => {
-  if (item.type === "direct") {
-    const otherUser = item.conversation_participants.find(
-      (p) => p.user_id !== user?.id
-    );
+      return {
+        conversation_id: item.id,
+        conversation_type: item.type,
+        conversation_name: item.subscription_posts?.title ?? "Group",
+      };
+    }) ?? [];
 
-    console.log("otherUser", otherUser);
-    return {
-      conversation_id: item.id,
-      conversation_type: item.type,
-      conversation_name: otherUser?.profiles?.name ?? "Unknown user",
-    };
-  }
-
-  // group / subscription conversation
-  return {
-    conversation_id: item.id,
-    conversation_type: item.type,
-    conversation_name: item.subscription_posts?.title ?? "Group",
-  };
-});
-
-subdata?.forEach((c) =>
-  console.log(
-    c.conversation_participants.map((p) => ({
-      uid: p.user_id,
-      profile: p.profiles,
-    }))
-  )
-);
-
-
-  propObjectArr?.map((item) => {
-    console.log("prop", item);
-  });
-
-  return (
-    <div className="flex h-screen w-full">
-      <ChatSidebar propObjectArr={propObjectArr} />
-      <ChatWindow />
-    </div>
-  );
+  return <ChatShell initialConversations={initialConversations} />;
 }
