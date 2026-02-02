@@ -310,7 +310,7 @@ export default async function Profile() {
                   className="border-2 border-white rounded-xl p-4 hover:border-gray-700 transition-colors"
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-linear-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
                       <Crown className="h-5 w-5 text-white" />
                     </div>
                     <div>

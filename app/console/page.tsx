@@ -45,7 +45,7 @@ export default async function ConsolePage() {
         </header>
 
         {/* Promo Banner */}
-        <div className="mb-8 relative overflow-hidden rounded-2xl bg-[#DFFF00] p-[2px]">
+        <div className="mb-8 relative overflow-hidden rounded-2xl bg-[#DFFF00] p-0.5">
           <div className="relative bg-[#0a0a0a] rounded-2xl p-6 md:p-8">
             <div className="absolute inset-0 bg-[#DFFF00]  rounded-2xl" />
             <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -60,7 +60,7 @@ export default async function ConsolePage() {
                 </div>
                 <h2 className="text-2xl md:text-3xl text-black font-black tracking-tight mb-2">
                   Why Pay Full Price?
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-950 to-blue-600">
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-950 to-blue-600">
                     {" "}
                     Split It!
                   </span>
