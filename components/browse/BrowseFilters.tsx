@@ -3,8 +3,19 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { cn } from "@/lib/utils";
-
-const PLATFORMS = ["All", "Netflix", "Spotify", "Youtube", "Amazon Prime", "Apple Music"];
+const PLATFORMS = [
+  "ENTERTAINMENT",
+  "MUSIC",
+  "GAMING",
+  "PRODUCTIVITY",
+  "CREATIVE",
+  "DEVELOPER",
+  "EDUCATION",
+  "VPN_SECURITY",
+  "CLOUD_STORAGE",
+  "AI_TOOLS",
+  "OTHER",
+];
 const POST_TYPES = [
   { label: "All", value: "all" },
   { label: "Offering", value: "OFFERING" },

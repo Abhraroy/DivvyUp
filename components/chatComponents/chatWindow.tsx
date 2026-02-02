@@ -253,7 +253,7 @@ export default function ChatWindow(props: ChatWindowProps) {
                         <div className="text-white self-end flex flex-row gap-2">
                           <span>{new Date(item.created_at)
                             .toLocaleTimeString()
-                            .slice(0,4)}</span>
+                            .slice(0,5)}</span>
                           <span>{new Date(item.created_at)
                             .toLocaleTimeString()
                             .slice(8,11)}</span>
@@ -264,11 +264,11 @@ export default function ChatWindow(props: ChatWindowProps) {
                         <p className="text-white">{item.content}</p>
                         <div className="text-white self-end flex flex-row gap-2">
                           <span>{new Date(item.created_at)
-                            .toLocaleTimeString()
-                            .slice(0, 4)}</span>
-                          <span>{new Date(item.created_at)
-                            .toLocaleTimeString()
-                            .slice(8, 11)}</span>
+                            .toLocaleTimeString([],{
+                              hour:"2-digit",
+                              minute:"2-digit"
+                            })
+                            }</span>
                         </div>
                       </>
                     )}

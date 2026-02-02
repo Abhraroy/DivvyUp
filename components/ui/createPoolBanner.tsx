@@ -17,8 +17,10 @@ export default function CreatePoolBanner() {
                     >
                         Start a New Group
                     </button>
-                    <button className="flex-1 border-2 border-black bg-transparent text-black py-4 px-6 text-sm font-black uppercase tracking-widest hover:bg-black/5 transition-colors">
-                        Learn More
+                    <button className="flex-1 border-2 border-black bg-transparent text-black py-4 px-6 text-sm font-black uppercase tracking-widest hover:bg-black/5 transition-colors"
+                    onClick={() => router.push("/console/request-pool")}
+                    >
+                        Request a Pool
                     </button>
                 </div>
             </div>

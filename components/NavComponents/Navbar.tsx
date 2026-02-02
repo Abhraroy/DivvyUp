@@ -7,6 +7,7 @@ const NAV_ITEMS = [
     { label: 'Dashboard', icon: Home, href: '/console' },
     { label: 'Browse', icon: Settings, href: '/console/browse' },
     { label: 'Chat', icon: MessageSquareText, href: '/console/chat' },
+    { label: 'Profile', icon: User, href: '/console/profile' },
 ];
 
 export default function Navbar() {

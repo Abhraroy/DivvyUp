@@ -23,7 +23,7 @@ export default async function BrowsePage({
     .order("created_at", { ascending: false });
 
   if (platformFilter && platformFilter !== "All") {
-    query = query.ilike("platform", `%${platformFilter}%`);
+    query = query.ilike("platform_type", `%${platformFilter}%`);
   }
 
   if (typeFilter && typeFilter !== "all") {

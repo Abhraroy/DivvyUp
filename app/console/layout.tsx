@@ -33,7 +33,7 @@ export default function ConsoleLayout({ children }: { children: ReactNode }) {
                     <CircleSlash2 size={25} className="text-white" />
                     <span className="text-white font-bold text-xl tracking-tighter text-wrap">DivvyUP</span>
                 </div>
-                <div className="flex-1 min-h-0 min-w-0 overflow-y-auto">{children}</div>
+                <div className="flex-1 min-h-0 min-w-0 overflow-y-auto custom-scrollbar">{children}</div>
                 <MobNavbar className="md:hidden flex h-[10vh]  shrink-0 " />
             </div>
         </>

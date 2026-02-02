@@ -3,6 +3,8 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import JoiningPage from "../browse/JoiningPage";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createDirectConvo } from "@/app/console/chat/action";
 
 export interface subscription_posts {
   id: string;
@@ -27,6 +29,7 @@ interface SubsCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function SubsCard({ post, className, ...props }: SubsCardProps) {
+  const router = useRouter();
   const [showJoiningPage, setShowJoiningPage] = useState(false);
   const {
     post_type,
@@ -39,6 +42,7 @@ export function SubsCard({ post, className, ...props }: SubsCardProps) {
     group_status,
     tags,
     expiry_date,
+    owner_id,
   } = post;
 
   const slots = (total_slots || 0) - (filled_slots || 0);
@@ -58,6 +62,19 @@ export function SubsCard({ post, className, ...props }: SubsCardProps) {
   let slotText = `${slots} LEFT`;
   if (slots === 1) slotText = "LAST ONE";
   if (slots === 0) slotText = "SOLD OUT";
+
+  
+
+
+  const handleJoin = () => {
+    if(post_type === "REQUEST"){
+      console.log(owner_id.user_id)
+      createDirectConvo(owner_id.user_id)
+      router.push(`/console/chat`);
+      return;
+    }
+    setShowJoiningPage(true);
+  };
 
   return (
     <>
@@ -139,9 +156,11 @@ export function SubsCard({ post, className, ...props }: SubsCardProps) {
               )}
             </div>
             <div className="text-right">
-              <span className="block text-[1rem] font-bold uppercase tracking-wider text-gray-500">
-                Slots
-              </span>
+              {total_slots && (
+                <span className="block text-[1rem] font-bold uppercase tracking-wider text-gray-500">
+                  Slots
+                </span>
+              )}
               <div className="flex items-center justify-end gap-1 mb-1">
                 {total_slots &&
                   total_slots > 0 &&
@@ -158,7 +177,7 @@ export function SubsCard({ post, className, ...props }: SubsCardProps) {
                   ))}
               </div>
               <span className="text-lg font-bold uppercase text-[#DFFF00]">
-                {slotText}
+                {total_slots && slotText}
               </span>
             </div>
           </div>
@@ -166,7 +185,7 @@ export function SubsCard({ post, className, ...props }: SubsCardProps) {
           {/* Button */}
           <button
             className="w-full bg-white py-3 text-sm font-black uppercase tracking-widest text-black transition-colors hover:bg-gray-200"
-            onClick={() => setShowJoiningPage(true)}
+            onClick={handleJoin}
           >
             {buttonText}
           </button>

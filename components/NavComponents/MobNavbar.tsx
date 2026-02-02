@@ -14,6 +14,7 @@ export default function MobNavbar({ className = "" }: MobNavbarProps) {
         { label: 'Browse', icon: TvMinimal, href: '/console/browse' },
         { label: 'Chat', icon: MessageSquareText, href: '/console/chat' },
         { label: 'Settings', icon: Settings, href: '/console/settings' },
+        { label: 'Profile', icon: User, href: '/console/profile' },
     ];
     return (
         <nav
@@ -32,10 +33,7 @@ export default function MobNavbar({ className = "" }: MobNavbarProps) {
                     </Link>
                 )
             })}
-            <button className="flex flex-col items-center gap-1 text-white/50">
-                <User size={20} />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Profile</span>
-            </button>
+           
         </nav>
     )
 }
