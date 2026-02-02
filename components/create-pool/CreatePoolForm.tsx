@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { createPool } from "@/app/console/create-pool/actions";
-import { Loader2, TrendingDown, CheckSquare, Image, Check,ArrowBigLeft } from "lucide-react";
+import {
+  Loader2,
+  TrendingDown,
+  CheckSquare,
+  Image,
+  Check,
+  ArrowBigLeft,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -96,11 +103,14 @@ export default function CreatePoolForm() {
       <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-8 border-b-4 border-black pb-4">
         Efficiency-driven subscription sharing
       </p>
-      <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
-      onClick={() => router.push("/console/browse")}
+      <div
+        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
+        onClick={() => router.push("/console/browse")}
       >
         <ArrowBigLeft className="h-5 w-5" />
-        <span className="font-bold uppercase tracking-wider">Back to Browse</span>
+        <span className="font-bold uppercase tracking-wider">
+          Back to Browse
+        </span>
       </div>
 
       <form
@@ -230,6 +240,21 @@ export default function CreatePoolForm() {
             className="w-full border-4 border-white p-3 font-bold outline-none text-xl no-spinner"
             value={slots}
             onChange={(e) => setSlots(e.target.value)}
+            required
+          />
+        </div>
+
+        {/* Reputation Required */}
+        <div className="space-y-2">
+          <label className="inline-block bg-[#DFFF00] px-2 py-1 text-xs font-black text-black uppercase tracking-widest border-2 border-black">
+            Reputation Required
+          </label>
+          <input
+            name="reputationRequired"
+            type="number"
+            min="0"
+            className="w-full border-4 border-white p-3 font-bold outline-none text-xl no-spinner"
+            defaultValue="1000"
             required
           />
         </div>
