@@ -4,7 +4,7 @@ import { ArrowRight, BarChart3, MessageSquare, CreditCard } from "lucide-react";
 export default function LiveFeedSection() {
   return (
     <section className="w-full border-b border-white/20 bg-[#0a0a0a] py-24 px-8">
-      <div className="mx-auto max-w-[1920px]">
+      <div className="mx-auto max-w-480">
         {/* Header */}
         <div className="mb-16">
           <h2 className="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4">
@@ -52,7 +52,7 @@ export default function LiveFeedSection() {
 
           {/* Mockup 2: Chat/Interaction */}
           <div className="group relative border border-white/20 bg-[#111] p-2 hover:border-[#DFFF00] transition-colors">
-            <div className="bg-[#fff] p-4 h-64 flex flex-col gap-3 overflow-hidden shadow-inner relative">
+            <div className="bg-white p-4 h-64 flex flex-col gap-3 overflow-hidden shadow-inner relative">
               {/* Mock Chat Bubbles */}
               <div className="self-start bg-gray-200 p-2 rounded-tl-xl rounded-tr-xl rounded-br-xl max-w-[80%]">
                 <div className="w-24 h-2 bg-gray-400 rounded-full"></div>

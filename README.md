@@ -1,48 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Divvy.Up // Share Costs. No Bullshit.
 
-## Getting Started
+![Divvy.Up Banner](https://placehold.co/1200x400/0a0a0a/DFFF00?text=Divvy.Up+Platform)
 
-First, run the development server:
+**Divvy.Up** is a next-generation subscription sharing platform designed for the modern web. We connect users to split the costs of premium services like Netflix, Spotify, and YouTube Premium, wrapped in a high-performance, brutalist interface that prioritizes utility and speed.
+
+## 🚀 The Mission
+
+Stop overpaying for services you don't use 24/7. Divvy.Up simplifies the shared ownership economy with automated coordination, secure messaging, and a reputation-driven ecosystem.
+
+## ✨ Key Features
+
+-   **🔍 Live Pool Browser**: Real-time feed of available subscription slots with advanced filtering by service type and price.
+-   **🛡️ Reputation System**: Minimum reputation requirements for pools ensure you only share with reliable, verified users.
+-   **💬 Encrypted Chat**: Built-in realtime messaging for every pool to securely share credentials and coordinate updates.
+-   **⚡ Automated Splitting**: (Concept) Smart contract-like escrow for handling monthly payments transparently.
+-   **🎨 Brutalist UI**: A high-contrast, "no-nonsense" design system featuring dark mode, neon accents, and visible architectural grids.
+-   **📱 Mobile Ready**: Fully responsive interface that works flawlessly across all devices.
+
+## 🛠️ Tech Stack
+
+Built with cutting-edge technologies for speed and scalability:
+
+-   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+-   **Language**: TypeScript
+-   **Styling**: Tailwind CSS + Custom Brutalist Design System
+-   **Backend/Auth**: [Supabase](https://supabase.com/) (PostgreSQL + Realtime)
+-   **Icons**: Lucide React
+-   **State Management**: Zustand
+
+## 🏁 Getting Started
+
+Clone the repository and install dependencies to run the local development server.
 
 ```bash
+# Clone the repo
+git clone https://github.com/yourusername/divvy-up.git
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your Supabase credentials:
+# NEXT_PUBLIC_SUPABASE_URL=...
+# NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+
+# Run the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📸 Interface Preview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Landing Page | Console Dashboard |
+| :---: | :---: |
+| *High-impact entry with key value props* | *Manage your active pools and requests* |
 
-## Learn More
+| Create Pool | Secure Chat |
+| :---: | :---: |
+| *Simple form with reputation controls* | *Real-time coordination with peers* |
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We welcome contributions! Please fork the repository and submit a pull request for any features, bug fixes, or design improvements.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
 
-
-
-
-  /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+<div align="center">
+  <p>Built with ⚡ efficiency in mind.</p>
+</div>
