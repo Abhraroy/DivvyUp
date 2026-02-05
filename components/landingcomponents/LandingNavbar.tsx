@@ -19,10 +19,10 @@ export default function LandingNavbar({ user }: any) {
 
         {/* Desktop Links (Optional - added for completeness based on ref) */}
         <div className="hidden md:flex gap-8">
-          {["Features", "Pricing", "About"].map((item) => (
+          {["Features","console", "About"].map((item) => (
             <Link
               key={item}
-              href="#"
+              href={`/${item.toLowerCase()}`}
               className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-[#DFFF00] transition-colors"
             >
               {item}

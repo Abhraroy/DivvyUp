@@ -5,6 +5,7 @@ import JoiningPage from "../browse/JoiningPage";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createDirectConvo } from "@/app/console/chat/action";
+import { useChatStore } from "@/lib/zustand/chatStore";
 
 export interface subscription_posts {
   id: string;
@@ -31,6 +32,8 @@ interface SubsCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function SubsCard({ post, className, ...props }: SubsCardProps) {
   const router = useRouter();
   const [showJoiningPage, setShowJoiningPage] = useState(false);
+  const { setConversationId, setConversationType, setConversationName } =
+    useChatStore();
   const {
     post_type,
     platform,
@@ -63,13 +66,10 @@ export function SubsCard({ post, className, ...props }: SubsCardProps) {
   if (slots === 1) slotText = "LAST ONE";
   if (slots === 0) slotText = "SOLD OUT";
 
-  
-
-
   const handleJoin = () => {
-    if(post_type === "REQUEST"){
-      console.log(owner_id.user_id)
-      createDirectConvo(owner_id.user_id)
+    if (post_type === "REQUEST") {
+      console.log(owner_id.user_id);
+      createDirectConvo(owner_id.user_id);
       router.push(`/console/chat`);
       return;
     }

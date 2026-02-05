@@ -19,7 +19,7 @@ export default function Navbar() {
         <nav className="hidden md:flex flex-col h-screen w-64 bg-brand-dark/95 backdrop-blur-md border-r border-white/10 z-50">
             <div className="p-6">
                 <Link href="/console" className="flex items-center gap-2 group mb-8">
-                    <div className=" p-1.5 rounded-sm group-hover:bg-brand-blue-hover transition-colors">
+                    <div className=" p-1.5 rounded-sm  hover:scale-110 transition-all ease-in-out duration-400">
                         <CircleSlash2 size={34} className="text-white  " />
                     </div>
                     <span className="text-white font-black text-xl tracking-tighter text-wrap">

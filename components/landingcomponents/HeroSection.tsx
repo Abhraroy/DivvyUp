@@ -23,13 +23,13 @@ export default function HeroSection() {
 
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/browse"
+              href="/console/browse"
               className="bg-[#DFFF00] text-black px-10 py-5 font-black uppercase tracking-wider text-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[6px_6px_0px_#fff] transition-all"
             >
               Join Now
             </Link>
             <Link
-              href="/host"
+              href="/console/create-pool"
               className="bg-transparent border-2 border-white text-white px-10 py-5 font-black uppercase tracking-wider text-sm hover:bg-white hover:text-black transition-colors"
             >
               Create Pool

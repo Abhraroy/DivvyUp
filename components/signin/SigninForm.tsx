@@ -67,16 +67,16 @@ export default function SigninForm() {
         </button>
 
         {/* Divider */}
-        <div className="my-8 flex items-center justify-between gap-4">
+        {/* <div className="my-8 flex items-center justify-between gap-4">
           <div className="h-0.5 w-full bg-white"></div>
           <span className="whitespace-nowrap text-xs font-bold uppercase tracking-widest text-white">
             Or_Use_Local
           </span>
           <div className="h-0.5 w-full bg-white"></div>
-        </div>
+        </div> */}
 
         {/* Email Form */}
-        <div className="space-y-6">
+        {/* <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-xs font-bold uppercase tracking-widest text-white">
               User_Email
@@ -91,7 +91,7 @@ export default function SigninForm() {
           <button className="w-full border-2 border-white bg-white px-4 py-4 text-sm font-bold uppercase tracking-wider text-black transition-all hover:bg-gray-100 hover:text-black">
             Submit_Identity
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Footer Links */}

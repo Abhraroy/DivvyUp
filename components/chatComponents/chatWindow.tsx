@@ -10,6 +10,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useRef } from "react";
 import { useAuthStore } from "@/lib/zustand/AuthStore";
+import { useRouter } from "next/navigation";
 
 export type ChatWindowProps = {
   onBack?: () => void;
@@ -17,6 +18,7 @@ export type ChatWindowProps = {
 };
 
 export default function ChatWindow(props: ChatWindowProps) {
+  const router = useRouter();
   const { onBack, className = "" } = props;
   const { conversation_id, conversation_name, conversation_type } =
     useChatStore();
@@ -156,7 +158,7 @@ export default function ChatWindow(props: ChatWindowProps) {
   }
 
   return (
-    <div className={`h-full w-full min-h-0 flex flex-col ${className}`}>
+    <div className={`h-full w-full min-h-0 flex flex-col  ${className}`} >
       <div className="w-full border-b p-4 flex flex-row gap-2 items-center justify-start  ">
         {onBack && (
           <button
@@ -168,24 +170,39 @@ export default function ChatWindow(props: ChatWindowProps) {
             <ArrowLeft className="h-4 w-4 text-white" />
           </button>
         )}
-        {conversation_type === "direct" ? (
-          <User className="text-white" />
-        ) : (
+        {conversation_type === "group" && (
           <Users className="text-white" />
         )}
-        <h2 className="font-bold text-lg">{conversation_name}</h2>
+       {conversation_type === "group" && <h2 className="font-bold text-lg decoration-current hover:cursor-pointer">{conversation_name}</h2>}
       </div>
 
       {conversation_type === "group" && (
         <div className="w-full border-b p-4 flex flex-row items-start justify-start  ">
           {conversation_members?.map((item: any, index: number) => (
-            <div key={index} className="flex flex-row gap-1">
+            <div key={index} className="flex flex-row gap-2">
               {item.profiles.user_id === user ? (
-                <p className="text-white">You</p>
+                <span className="text-white underline decoration-transparent underline-offset-4 hover:cursor-pointer hover:decoration-amber-400 hover:decoration-solid transition-all duration-300 " onClick={() => router.push(`/console/profile`)}>You</span>
               ) : (
-                <p className="text-white">{item.profiles?.name}</p>
+                <p className="text-white underline decoration-transparent underline-offset-4 hover:cursor-pointer hover:decoration-amber-400 hover:decoration-solid transition-all duration-300 " onClick={() => router.push(`/console/user/${item.profiles.user_id}`)}>{item.profiles?.name}</p>
               )}
               <span>{index < conversation_members.length - 1 && ", "}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {conversation_type === "direct" && (
+        <div className="w-full border-b p-4 flex gap-2 flex-row items-center justify-start  ">
+          {conversation_type === "direct" ? (
+          <User className="text-white" />
+        ) : (
+          <Users className="text-white" />
+        )}
+          {conversation_members?.map((item: any, index: number) => (
+            <div key={index} className="flex flex-row gap-1">
+              {item.profiles.user_id !== user && (
+                <p className="text-white" onClick={() => router.push(`/console/user/${item.profiles.user_id}`)} >{item.profiles?.name}</p>
+              )}
             </div>
           ))}
         </div>
@@ -208,10 +225,17 @@ export default function ChatWindow(props: ChatWindowProps) {
                   
                   .substring(0, 10)
                 : null;
-            console.log("item", item.created_at);
-            console.log("currentDate", currentDate);
-            console.log("previousDate", previousDate);
-            console.log(new Date().toLocaleDateString("en-CA"));
+            // console.log("item", item.created_at);
+            // console.log("currentDate", currentDate);
+            // console.log("previousDate", previousDate);
+            // console.log(new Date().toLocaleDateString("en-CA"));
+
+            const current_time = new Date(item.created_at).toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+            console.log("current_time");
+            console.log("current_time", current_time);
 
             const showDate = index === 0 || currentDate !== previousDate;
             return (
@@ -251,24 +275,14 @@ export default function ChatWindow(props: ChatWindowProps) {
                           {item.content}
                         </p>
                         <div className="text-white self-end flex flex-row gap-2">
-                          <span>{new Date(item.created_at)
-                            .toLocaleTimeString()
-                            .slice(0,5)}</span>
-                          <span>{new Date(item.created_at)
-                            .toLocaleTimeString()
-                            .slice(8,11)}</span>
+                          <span>{current_time}</span>
                         </div>
                       </>
                     ) : (
                       <>
                         <p className="text-white">{item.content}</p>
                         <div className="text-white self-end flex flex-row gap-2">
-                          <span>{new Date(item.created_at)
-                            .toLocaleTimeString([],{
-                              hour:"2-digit",
-                              minute:"2-digit"
-                            })
-                            }</span>
+                          <span>{current_time}</span>
                         </div>
                       </>
                     )}
