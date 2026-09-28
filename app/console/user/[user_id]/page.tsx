@@ -1,7 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { Mail, Calendar, Users, Crown, Shield } from "lucide-react";
-import ReputationButtons from "./ReputationButtons";
 import ReportUser from "./ReportUser";
 import PromoteUser from "./PromoteUser";
 
